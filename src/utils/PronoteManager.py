@@ -1,18 +1,17 @@
+#Dépendances
 import csv
 
 
 def importCsv():
     table = []
-    # csv.reader(open('csv_files/sample.csv', 'rU'), delimiter=",", quotechar='|')
-    with open('../../resources/resultatVF.csv') as csvfile:  # ouverture du fichier csv
-        lecture_fichier_csv = csv.reader(csvfile,
-                                         delimiter=',')  # stockage dans la variable lecture_fichier_csv avec délimiteur "virgule"
+    with open('../../resources/resultatVF.csv') as csvfile:
+        lecture_fichier_csv = csv.reader(csvfile,delimiter=',')
         for ligne in lecture_fichier_csv:
             table.append(ligne)
     return table
 
 
-table = importCsv()
+table = importCsv() #Création d'une variable globale qui sera utilisé pour toutes les autres fonctions
 
 
 def moyenneDevoirs(notes: dict) -> tuple:
@@ -36,7 +35,7 @@ def moyenneDevoirs(notes: dict) -> tuple:
     return dict
 
 
-def moyenneEleves(notes: dict) -> dict:
+def moyenneEleves(notes: dict) -> list:
     moyenneEleves = []
     for i in range(1, len(notes)):
         temp_dict = {}
@@ -55,7 +54,7 @@ def annexeNotesByMoyennes(l: list) -> list:
     return new_l
 
 
-def annexeTri(l: list) -> list:
+def annexeTriDecroissant(l: list) -> list:
     n = len(l)
     for i in range(0, n - 1):
         indexminimum = i
@@ -64,21 +63,17 @@ def annexeTri(l: list) -> list:
                 indexminimum = j
         if indexminimum != i:
             l[i], l[indexminimum] = l[indexminimum], l[i]
+    l.reverse()
     return l
 
 
-def moyennesDecroissant():
-    moyennes = moyenneEleves(table)
+def moyennesDecroissant(notes: dict) -> list:
+    moyennes = moyenneEleves(notes)
     moyennes_notes = annexeNotesByMoyennes(moyennes)
-    moyennes_notes_triees = annexeTri(moyennes_notes)
-    moyennes_notes_triees = moyennes_notes_triees.reverse()  # reverse de la liste
+    moyennes_notes_triees = annexeTriDecroissant(moyennes_notes)
     moyennesDecroissant = []
     for i in range(len(moyennes_notes_triees)):
-        for i in range(len(moyennes_notes)):
-            if moyennes_notes[i]["Moyenne"] == moyennes_notes_triees[i]:
-                # moyennesDecroissant.app
-                print("yes")
-    # print(moyennesDecroissant)
-
-
-print(moyennesDecroissant())
+        for j in range(len(moyennes_notes)):
+            if moyennes[j]["Moyenne"] == moyennes_notes_triees[i]:
+                moyennesDecroissant.append([moyennes[j]["Nom"],moyennes_notes_triees[i]])
+    return(moyennesDecroissant)
