@@ -38,13 +38,16 @@ def moyenneDevoirs(notes: list) -> dict:
     return dict
 
 
-def getMoyenneByDevoir(devoir:str) -> float:
+def getMoyenneByDevoir(devoir: str) -> float:
     """
     Fonction qui permet de retrouver la moyenne du devoir 'devoir' entré en paramètre
     :return: moyenne:float
     """
     moyennes=moyenneDevoirs(table)
-    return moyennes[devoir]
+    if type(moyennes[devoir]==float):
+        return moyennes[devoir]
+    else:
+        return None
 
 
 def moyenneEleves(notes: list) -> list:
@@ -68,9 +71,13 @@ def getMoyenneByEleve(eleve: str) -> float:
     :return: moyenne:float
     """
     moyennes = moyenneEleves(table)
+    find=False
     for elt in moyennes:
         if elt["Nom"]==eleve:
+            find=True
             return elt["Moyenne"]
+    if find==False:
+        return None
 
 
 def annexeNotesByMoyennes(l: list) -> list:
