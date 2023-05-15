@@ -41,14 +41,11 @@ def moyenneEleves(notes:dict) -> dict:
         moyenneEleves.append(temp_dict)
     return(moyenneEleves)
 
-
-def moyennesDecroissant(notes:dict) -> list:
-    moyennes=moyenneEleves(notes)
-    moyennesDecroissant=[]
-    for i in range(len(moyennes)):
-        moyennesDecroissant.append([moyennes[i]["Nom"],moyennes[i]["Moyenne"]])
-    moyennesDecroissant=annexeTri(moyennesDecroissant)
-    return(moyennesDecroissant)
+def annexeNotesByMoyennes(l:list) -> list:
+    new_l=[]
+    for i in range(len(l)):
+        new_l.append(l[i]["Moyenne"])
+    return(new_l)
 
 def annexeTri(l:list) -> list:
     n=len(l)
@@ -60,3 +57,18 @@ def annexeTri(l:list) -> list:
         if indexminimum != i:
             l[i], l[indexminimum] = l[indexminimum], l[i]
     return(l)
+
+def moyennesDecroissant():
+    moyennes=moyenneEleves(table)
+    moyennes_notes=annexeNotesByMoyennes(moyennes)
+    moyennes_notes_triees=annexeTri(moyennes_notes)
+    moyennes_notes_triees=moyennes_notes_triees.reverse() #reverse de la liste
+    moyennesDecroissant=[]
+    for i in range(len(moyennes_notes_triees)):
+        for i in range(len(moyennes_notes)):
+            if moyennes_notes[i]["Moyenne"]==moyennes_notes_triees[i]:
+                #moyennesDecroissant.app
+                print("yes")
+    #print(moyennesDecroissant)
+
+print(moyennesDecroissant())
