@@ -3,7 +3,7 @@ from tkinter import *
 
 data: dict = {
     "title": "Pronote",
-    "icon": "../../resources/icon.ico",
+    "icon": '../resources/icon.ico',
     "geometry": "720x480",
     "minSize": (720, 480),
     "maxSize": (720, 480),
@@ -21,10 +21,9 @@ def init():
     main: MainInterface = MainInterface(
         window,
         data["title"],
-        data["../../resources/icon.ico"],
+        data["icon"],
         data["geometry"],
         data["minSize"],
         data["maxSize"],
         data["background"]
     )
-    main.genWindow()

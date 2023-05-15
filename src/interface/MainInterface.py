@@ -20,6 +20,15 @@ class MainInterface:
         self.minSize: tuple = minSize
         self.maxSize: tuple = maxSize
         self.background: str = background
+        self.genWindow()
+        self.baseFrame: Frame = Frame(self.window, bg=self.getBackground())
+        # Obliger de stocker l'image en propriete de la class pour pas quue la variable se detruise apres
+        # execution d'une fonction
+        self.imageHeader: PhotoImage = PhotoImage(file="../resources/header.png").zoom(2).subsample(20)
+        self.genHeader()
+
+        self.baseFrame.pack(fill=X)
+        window.mainloop()
 
     def genWindow(self):
         '''
@@ -30,11 +39,39 @@ class MainInterface:
         window.title(self.getTitle())
         window.iconbitmap(self.getIconPath())
         window.geometry(self.getGeometry())
-        window.minsize(self.minSize[0], self.minSize[1])
-        window.maxsize(self.maxSize[0], self.maxSize[1])
+        window.minsize(self.getMinSize()[0], self.getMinSize()[1])
+        window.maxsize(self.getMaxSize()[0], self.getMaxSize()[1])
         window.config(background=self.background)
         window.config()
-        window.mainloop()
+
+    def genHeader(self):
+        '''
+        genere le bandeau situé en haut de la page avec l'image du professeur et le titre
+        :return: void
+        '''
+        header_frame = Frame(self.getBaseFrame(), bg="green")
+        header_frame.pack(fill=X)
+
+        canvas = Canvas(header_frame, width=75, height=75, bg="green", bd=0, highlightthickness=0)
+        canvas.pack(side=LEFT)
+
+        canvas.create_image(75 / 2, 75 / 2, image=self.imageHeader)
+
+        title: Label = Label(
+            header_frame,
+            text="Interface professeur",
+            font=("Arial", 30),
+            fg="white",
+            bg="green",
+            relief=SUNKEN
+        )
+        title.pack(side=LEFT, padx=125, pady=10)
+
+    def genButtons(self):
+        '''
+        genère les buttons de l'interface
+        :return:
+        '''
 
     def getWindow(self) -> Tk:
         return self.window
@@ -56,3 +93,6 @@ class MainInterface:
 
     def getBackground(self) -> str:
         return self.background
+
+    def getBaseFrame(self) -> Frame:
+        return self.baseFrame
