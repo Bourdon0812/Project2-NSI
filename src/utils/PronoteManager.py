@@ -18,7 +18,7 @@ def importCsv():
 table = importCsv() #Création d'une variable globale qui sera utilisée pour toutes les autres fonctions
 
 
-def moyenneDevoirs(notes: dict) -> dict:
+def moyenneDevoirs(notes: list) -> dict:
     """
     Fonction qui à partir des notes de l'entrée 'notes' retourne un dictionnaire avec les moyennes des 5 DS
     :return: dict:dict
@@ -38,12 +38,21 @@ def moyenneDevoirs(notes: dict) -> dict:
     return dict
 
 
-def moyenneEleves(notes: dict) -> list:
+def getMoyenneByDevoir(devoir:str) -> float:
+    """
+    Fonction qui permet de retrouver la moyenne du devoir 'devoir' entré en paramètre
+    :return: moyenne:float
+    """
+    moyennes=moyenneDevoirs(table)
+    return moyennes[devoir]
+
+
+def moyenneEleves(notes: list) -> list:
     """
     Fonction qui à partir des notes de l'entrée 'notes' retourne une liste de dictionnaire comprenant le Nom & Prénom de l'élève ainsi que sa moyenne général
     :return: moyenneEleves:dict
     """
-    moyenneeleves = []
+    moyenneEleves = []
     for i in range(1, len(notes)): #Pour chaque élève on créer un dictionnaire avec Nom,Prénom et Moyenne qui correspond
         temp_dict = {}
         temp_dict["Nom"] = notes[i][0]
@@ -51,6 +60,17 @@ def moyenneEleves(notes: dict) -> list:
         temp_dict["Moyenne"] = (int(notes[i][2]) + int(notes[i][3]) + int(notes[i][4]) + int(notes[i][5]) + int(notes[i][6])) / 5
         moyenneEleves.append(temp_dict)
     return moyenneEleves
+
+
+def getMoyenneByEleve(eleve: str) -> float:
+    """
+    Fonction qui retourne la moyenne g. de l'élève 'eleve' entré
+    :return: moyenne:float
+    """
+    moyennes = moyenneEleves(table)
+    for elt in moyennes:
+        if elt["Nom"]==eleve:
+            return elt["Moyenne"]
 
 
 def annexeNotesByMoyennes(l: list) -> list:
