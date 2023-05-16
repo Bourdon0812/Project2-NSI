@@ -1,5 +1,7 @@
-from src.interface.MainInterface import MainInterface
 from tkinter import *
+
+from src.interface import AllMoyennesSubInterface
+from src.interface.MainInterface import MainInterface
 
 mainInterfaceData: dict = {
     "title": "Pronote",
@@ -29,10 +31,32 @@ customButtonsData: dict = {
     }
 }
 
+subInterfaceData: dict = {
+    customButtonsData[eleveMoyenneButtonName]["id"]: {
+        "title": "Pronote",
+        "icon": '../resources/icon.ico',
+        "geometry": "720x480",
+        "minSize": (720, 480),
+        "maxSize": (720, 480),
+        "background": "#535353",
+        "header": "[Moyenne élève] saisissez nom élève : "
+    },
+    customButtonsData[devoirMoyenneButtonName]["id"]: {
+        "title": "Pronote",
+        "icon": '../resources/icon.ico',
+        "geometry": "720x480",
+        "minSize": (720, 480),
+        "maxSize": (720, 480),
+        "background": "#535353",
+        "header": "[Moyenne devoir] saisissez nom du devoir : "
+    }
+}
+
 window: Tk = Tk()
 
+mainInterface: MainInterface | None = None
 
-def init():
+def init() -> None:
     '''
     init program
     :return void:
@@ -46,3 +70,30 @@ def init():
         mainInterfaceData["maxSize"],
         mainInterfaceData["background"]
     )
+
+
+def getSubInterfaceData(id: int) -> dict:
+    return subInterfaceData[id]
+
+
+def openMoyenneSubInterface(id: int, currentInterface: MainInterface) -> None:
+    global mainInterface
+    if mainInterface is None:
+        mainInterface = currentInterface
+    from src.interface.MoyenneSubInterface import MoyenneSubInterface
+    subInterface: MoyenneSubInterface = MoyenneSubInterface(id)
+    currentInterface.setSubInterfaceOpen(subInterface)
+    subInterface.genWindow()
+
+
+def closeSubInterface() -> None:
+    global mainInterface
+    if not mainInterface is None:
+        mainInterface.setSubInterfaceOpen(None)
+
+
+def openViewAllMoyenneSubInterface(currentInterface: MainInterface) -> None:
+    subInterface: AllMoyennesSubInterface = AllMoyennesSubInterface()
+    currentInterface.setSubInterfaceOpen(subInterface)
+
+
