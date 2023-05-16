@@ -8,7 +8,7 @@ mainInterfaceData: dict = {
     "geometry": "720x480",
     "minSize": (720, 480),
     "maxSize": (720, 480),
-    "background": "#535353"
+    "background": "grey"
 }
 
 eleveMoyenneButtonName: str = "eleveMoyenneButton"
@@ -37,7 +37,7 @@ subInterfaceData: dict = {
         "geometry": "720x480",
         "minSize": (720, 480),
         "maxSize": (720, 480),
-        "background": "#535353",
+        "background": "grey",
         "header": "Moyenne élève",
         "labelInput": "Saisissez nom de l'élève : "
     },
@@ -47,17 +47,17 @@ subInterfaceData: dict = {
         "geometry": "720x480",
         "minSize": (720, 480),
         "maxSize": (720, 480),
-        "background": "#535353",
+        "background": "grey",
         "header": "Moyenne devoir",
         "labelInput": "Saisissez nom du devoir : "
     },
     customButtonsData[viewAllMoyenneButtonName]["id"]: {
         "title": "Pronote",
         "icon": '../resources/icon.ico',
-        "geometry": "480x480",
-        "minSize": (480, 480),
+        "geometry": "650x480",
+        "minSize": (650, 480),
         "maxSize": (480, 1080),
-        "background": "white",
+        "background": "grey",
         "header": "moyennes",
     }
 }
@@ -106,5 +106,5 @@ def closeSubInterface() -> None:
 def openViewAllMoyenneSubInterface(id, currentInterface: MainInterface) -> None:
     from src.interface.AllMoyennesSubInterface import AllMoyenneSubInterface
     subInterface: AllMoyenneSubInterface = AllMoyenneSubInterface(id)
-    subInterface.genWindow()
     currentInterface.setSubInterfaceOpen(subInterface)
+    subInterface.genWindow()

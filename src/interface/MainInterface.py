@@ -52,10 +52,10 @@ class MainInterface:
         genere le bandeau situé en haut de la page avec l'image du professeur et le titre
         :return: void
         '''
-        header_frame = Frame(self.getBaseFrame(), bg="blue", pady=20)
+        header_frame = Frame(self.getBaseFrame(), bg="#17AA67", pady=20)
         header_frame.pack(fill=X)
 
-        canvas = Canvas(header_frame, width=75, height=75, bg="blue", bd=0, highlightthickness=0)
+        canvas = Canvas(header_frame, width=75, height=75, bg="#17AA67", bd=0, highlightthickness=0)
         canvas.pack(side=LEFT)
 
         canvas.create_image(75 / 2, 75 / 2, image=self.imageHeader)
@@ -65,8 +65,7 @@ class MainInterface:
             text="Interface professeur",
             font=("Arial", 30),
             fg="white",
-            bg="red",
-            relief=SUNKEN
+            bg="#17AA67",
         )
         title.pack(side=LEFT, padx=125, pady=10)
 
@@ -81,7 +80,7 @@ class MainInterface:
             eleveMoyenneButtonName, \
             devoirMoyenneButtonName, \
             viewAllMoyenneButtonName
-        button_frame: Frame = Frame(self.getBaseFrame(), bg="#535353", pady=40)
+        button_frame: Frame = Frame(self.getBaseFrame(), bg=self.background, pady=40)
         button_frame.pack(side=LEFT, fill=BOTH, expand=True)
 
         exitButton: Button = Button(button_frame, text="Quitter pronote", bg="red", fg="white", command=self.onQuit)
@@ -90,7 +89,7 @@ class MainInterface:
         getMoyenneByEleveButton: CustomButton = CustomButton(
             button_frame,
             text=customButtonsData[eleveMoyenneButtonName]["title"],
-            bg="blue",
+            bg="#17AA67",
             fg="white",
             command=lambda: onClick(customButtonsData[eleveMoyenneButtonName]["id"], self)
         )
@@ -100,7 +99,7 @@ class MainInterface:
         getMoyenneDevoirButton: CustomButton = CustomButton(
             button_frame,
             text=customButtonsData[devoirMoyenneButtonName]["title"],
-            bg="blue",
+            bg="#17AA67",
             fg="white",
             command=lambda: onClick(customButtonsData[devoirMoyenneButtonName]["id"], self)
         )
@@ -110,7 +109,7 @@ class MainInterface:
         viewMoyennesButton: CustomButton = CustomButton(
             button_frame,
             text=customButtonsData[viewAllMoyenneButtonName]["title"],
-            bg="blue",
+            bg="#17AA67",
             fg="white",
             command=lambda: onClick(customButtonsData[viewAllMoyenneButtonName]["id"], self)
         )

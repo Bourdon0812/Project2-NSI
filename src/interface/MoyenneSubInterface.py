@@ -29,7 +29,7 @@ class MoyenneSubInterface:
         window.mainloop()
 
     def genHeader(self):
-        header_frame = Frame(self.baseFrame, bg="blue", pady=20)
+        header_frame = Frame(self.baseFrame, bg="#17AA67", pady=20)
         header_frame.pack(fill=X)
         text = self.getData()["header"]
         title: Label = Label(
@@ -37,7 +37,7 @@ class MoyenneSubInterface:
             text=text,
             font=("Arial", 24),
             fg="white",
-            bg="red",
+            bg="#17AA67",
             relief=SUNKEN
         )
         title.pack(side=LEFT, padx=250, pady=10)
@@ -54,7 +54,7 @@ class MoyenneSubInterface:
         exitButton.grid(row=0, column=4, sticky="ne", padx=40, pady=5)
 
         text = self.getData()["labelInput"]
-        instruction: Label = Label(content_frame, text=text, bg="#535353", font=("Arial", 15), fg="white")
+        instruction: Label = Label(content_frame, text=text, bg="grey", font=("Arial", 15), fg="white")
         instruction.grid(row=1, column=0, sticky="w", padx=10, pady=30)
 
         input_entry = Entry(content_frame)
@@ -65,7 +65,7 @@ class MoyenneSubInterface:
         red_square = Label(content_frame, bg="red", width=4, height=2)
         red_square.grid(row=1, column=2, sticky="w", padx=10, pady=30)
 
-        send_button = Button(content_frame, text="Envoyer", bg="blue", command=lambda: onClick(self))
+        send_button = Button(content_frame, text="Envoyer", bg="#17AA67", command=lambda: onClick(self))
         send_button.grid(row=1, column=3, sticky="w", padx=10, pady=30)
 
     def getId(self) -> int:
