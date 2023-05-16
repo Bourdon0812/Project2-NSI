@@ -8,7 +8,9 @@
 # à executer sous python 3.10.X
 
 
-from src.utils.InterfaceManager import *
+from src.utils.InterfaceManager import initInterfaceManager
+from src.utils.PronoteManager import initPronoteManager
 
 if __name__ == '__main__':
-    init()
+    initPronoteManager()
+    initInterfaceManager()

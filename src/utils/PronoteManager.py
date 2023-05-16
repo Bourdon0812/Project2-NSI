@@ -1,6 +1,7 @@
 #Dépendances
 import csv
 
+tableD: list | None = None
 
 def importCsv():
     """
@@ -8,14 +9,16 @@ def importCsv():
     :return: table:list
     """
     table = []
-    with open('../../resources/resultatVF.csv') as csvfile:
-        lecture_fichier_csv = csv.reader(csvfile,delimiter=',')
+    with open('../resources/resultatVF.csv') as csvfile:
+        lecture_fichier_csv = csv.reader(csvfile, delimiter=',')
         for ligne in lecture_fichier_csv:
             table.append(ligne)
     return table
 
 
-table = importCsv() #Création d'une variable globale qui sera utilisée pour toutes les autres fonctions
+def initPronoteManager():
+    global tableD
+    tableD = importCsv()
 
 
 def moyenneDevoirs(notes: list) -> dict:
@@ -38,14 +41,15 @@ def moyenneDevoirs(notes: list) -> dict:
     return dict
 
 
-def getMoyenneByDevoir(devoir: str) -> float:
+def getMoyenneByDevoir(devoir: str) -> float | None:
     """
     Fonction qui permet de retrouver la moyenne du devoir 'devoir' entré en paramètre
     :return: moyenne:float
     """
-    moyennes=moyenneDevoirs(table)
-    if type(moyennes[devoir]==float):
-        return moyennes[devoir]
+    moyennes = moyenneDevoirs(getTable())
+    moyenne = moyennes.get(devoir)
+    if moyenne is not None:
+        return float(moyenne)
     else:
         return None
 
@@ -65,18 +69,18 @@ def moyenneEleves(notes: list) -> list:
     return moyenneEleves
 
 
-def getMoyenneByEleve(eleve: str) -> float:
+def getMoyenneByEleve(eleve: str) -> float | None:
     """
     Fonction qui retourne la moyenne g. de l'élève 'eleve' entré
     :return: moyenne:float
     """
-    moyennes = moyenneEleves(table)
-    find=False
+    moyennes = moyenneEleves(getTable())
+    find = False
     for elt in moyennes:
-        if elt["Nom"]==eleve:
-            find=True
+        if elt["Nom"] == eleve:
+            find = True
             return elt["Moyenne"]
-    if find==False:
+    if not find:
         return None
 
 
@@ -108,7 +112,7 @@ def annexeTriDecroissant(l: list) -> list:
     return l
 
 
-def moyennesDecroissant(notes: dict) -> list:
+def moyennesDecroissant(notes: list) -> list:
     """
     Fonction qui permet à partir des notes de l'entrée 'notes' et des moyennes des élèves d'établir un classement de la plus grosse à la plus faible moyenne sous forme de liste
     :return: moyennesDecroissant:list
@@ -122,3 +126,7 @@ def moyennesDecroissant(notes: dict) -> list:
             if moyennes[j]["Moyenne"] == moyennes_notes_triees[i]:
                 moyennesDecroissant.append([moyennes[j]["Nom"],moyennes_notes_triees[i]])
     return moyennesDecroissant
+
+
+def getTable() -> list:
+    return tableD

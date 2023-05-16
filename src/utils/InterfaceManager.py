@@ -1,6 +1,5 @@
 from tkinter import *
 
-from src.interface import AllMoyennesSubInterface
 from src.interface.MainInterface import MainInterface
 
 mainInterfaceData: dict = {
@@ -26,7 +25,7 @@ customButtonsData: dict = {
         "id": 1
     },
     viewAllMoyenneButtonName: {
-        "title": "Voir la moyenne de tout les éléves",
+        "title": "Voir la moyenne de tout les élèves",
         "id": 2
     }
 }
@@ -39,7 +38,8 @@ subInterfaceData: dict = {
         "minSize": (720, 480),
         "maxSize": (720, 480),
         "background": "#535353",
-        "header": "[Moyenne élève] saisissez nom élève : "
+        "header": "Moyenne élève",
+        "labelInput": "Saisissez nom de l'élève : "
     },
     customButtonsData[devoirMoyenneButtonName]["id"]: {
         "title": "Pronote",
@@ -48,7 +48,17 @@ subInterfaceData: dict = {
         "minSize": (720, 480),
         "maxSize": (720, 480),
         "background": "#535353",
-        "header": "[Moyenne devoir] saisissez nom du devoir : "
+        "header": "Moyenne devoir",
+        "labelInput": "Saisissez nom du devoir : "
+    },
+    customButtonsData[viewAllMoyenneButtonName]["id"]: {
+        "title": "Pronote",
+        "icon": '../resources/icon.ico',
+        "geometry": "480x480",
+        "minSize": (480, 480),
+        "maxSize": (480, 1080),
+        "background": "white",
+        "header": "moyennes",
     }
 }
 
@@ -56,7 +66,8 @@ window: Tk = Tk()
 
 mainInterface: MainInterface | None = None
 
-def init() -> None:
+
+def initInterfaceManager() -> None:
     '''
     init program
     :return void:
@@ -92,8 +103,8 @@ def closeSubInterface() -> None:
         mainInterface.setSubInterfaceOpen(None)
 
 
-def openViewAllMoyenneSubInterface(currentInterface: MainInterface) -> None:
-    subInterface: AllMoyennesSubInterface = AllMoyennesSubInterface()
+def openViewAllMoyenneSubInterface(id, currentInterface: MainInterface) -> None:
+    from src.interface.AllMoyennesSubInterface import AllMoyenneSubInterface
+    subInterface: AllMoyenneSubInterface = AllMoyenneSubInterface(id)
+    subInterface.genWindow()
     currentInterface.setSubInterfaceOpen(subInterface)
-
-

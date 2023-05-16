@@ -75,7 +75,7 @@ class MainInterface:
         genère les buttons de l'interface
         :return: void
         '''
-        from src.events.ButtonClickedListener import onClick
+        from src.events.CustomButtonClickedListener import onClick
         from src.utils.InterfaceManager import \
             customButtonsData, \
             eleveMoyenneButtonName, \

@@ -22,5 +22,4 @@ def onClick(customButtonId: int, currentInterface: MainInterface):
         openMoyenneSubInterface(customButtonId, currentInterface)
 
     elif customButtonId == customButtonsData[viewAllMoyenneButtonName]["id"]:
-        print("3")
-        # currentInterface.onQuit()
+        openViewAllMoyenneSubInterface(customButtonId, currentInterface)
